@@ -104,21 +104,12 @@ class _otpEnterState extends State<otpEnter> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: height * 0.04),
+                  padding: EdgeInsets.only(top: height * 0.07),
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () async {
-                      // print(otpCode);
-                      // print("otp: ${phoneNumberEnter.verify}");
-                      // PhoneAuthCredential credential =
-                      //     PhoneAuthProvider.credential(
-                      //         verificationId: phoneNumberEnter.verify,
-                      //         smsCode: otpCode);
-
-                      // await auth.signInWithCredential(credential);
-
-                      // Navigator.pushNamedAndRemoveUntil(
-                      //     context, "homePage", (route) => false);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "phoneNumberEnter", (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 8,
@@ -126,12 +117,12 @@ class _otpEnterState extends State<otpEnter> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      padding: EdgeInsets.fromLTRB(width * 0.365, width * 0.038,
-                          width * 0.365, width * 0.038),
+                      padding: EdgeInsets.fromLTRB(width * 0.2, width * 0.035,
+                          width * 0.2, width * 0.035),
                     ),
-                    child: const Text('Resend OTP',
+                    child: const Text('Edit Phone Number',
                         style: TextStyle(
-                            fontWeight: FontWeight.normal,
+                            fontWeight: FontWeight.w500,
                             fontSize: 20,
                             color: Colors.white),
                         textAlign: TextAlign.center),
@@ -139,26 +130,23 @@ class _otpEnterState extends State<otpEnter> {
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: height * 0.02, bottom: 0),
+                  padding: EdgeInsets.only(top: height * 0.001, bottom: 0),
                   child: TextButton(
-                    onPressed: () {},
-                    child: const Text('Resend OTP',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color.fromRGBO(26, 42, 82, 1),
-                            fontFamily: 'Montserrat',
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500)),
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, "phoneNumberEnter", (route) => false);
+                    onPressed: () async {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                        phoneNumber: '${phoneNumber}',
+                        timeout: const Duration(seconds: 120),
+                        verificationCompleted:
+                            (PhoneAuthCredential credential) {},
+                        verificationFailed: (FirebaseAuthException e) {},
+                        codeSent: (String verificationId, int? resendToken) {
+                          phoneNumberEnter.verify = verificationId;
+                          print("phonel: ${phoneNumberEnter.verify}");
+                        },
+                        codeAutoRetrievalTimeout: (String verificationId) {},
+                      );
                     },
-                    child: const Text('Edit Phone Number',
+                    child: const Text('Resend OTP',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color.fromRGBO(26, 42, 82, 1),
