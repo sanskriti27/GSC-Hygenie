@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:hygenie/otpSignIn/storeUserInfo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -12,6 +17,63 @@ class phoneNumberEnter extends StatefulWidget {
 class _phoneNumberEnter extends State<phoneNumberEnter> {
   var height, width, phoneNumber;
   bool phoneNUmberFilled = false;
+  SharedPreferences? prefs;
+  User? currentUser;
+
+  signInWithGoogle() async {
+    prefs = await SharedPreferences.getInstance();
+
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    User? firebaseUser =
+        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+    // return await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (firebaseUser != null) {
+      // Check is already sign up
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: firebaseUser.uid)
+          .get();
+      final List<DocumentSnapshot> documents = result.docs;
+      if (documents.length == 0) {
+        // Update data to server if new user
+        FirebaseFirestore.instance
+            .collection('chat')
+            .doc(firebaseUser.uid)
+            .set({
+          'nickname': firebaseUser.displayName,
+          'photoUrl': firebaseUser.photoURL,
+          'id': firebaseUser.uid,
+          'createdAt': DateTime.now().toString(),
+          'chattingWith': null
+        });
+
+        // Write data to local
+        currentUser = firebaseUser;
+        await prefs?.setString('id', currentUser!.uid);
+        await prefs?.setString('nickname', currentUser!.displayName ?? "");
+        await prefs?.setString('photoUrl', currentUser!.photoURL ?? "");
+      } else {
+        DocumentSnapshot documentSnapshot = documents[0];
+        UserChat userChat = UserChat.fromDocument(documentSnapshot);
+        // Write data to local
+        await prefs?.setString('id', userChat.id);
+        await prefs?.setString('nickname', userChat.nickname);
+        await prefs?.setString('photoUrl', userChat.photoUrl);
+        await prefs?.setString('aboutMe', userChat.aboutMe);
+      }
+      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(currentUserId: firebaseUser.uid)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +191,17 @@ class _phoneNumberEnter extends State<phoneNumberEnter> {
                               fontFamily: 'Montserrat',
                               fontSize: 18,
                               fontWeight: FontWeight.normal))),
+                  Container(
+                    padding: EdgeInsets.only(
+                        left: width * 0.25, right: width * 0.25),
+                    alignment: Alignment.center,
+                    child: SignInButton(Buttons.Google, onPressed: () {
+                      signInWithGoogle().whenComplete(() {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, "homePage", (route) => false);
+                      });
+                    }),
+                  )
                 ])
           ],
         ),

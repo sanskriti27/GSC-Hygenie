@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -38,6 +39,14 @@ class _homeState extends State<home> {
     });
   }
 
+  Future signOut(context) async {
+    _auth.signOut();
+    final googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+    Navigator.pushNamedAndRemoveUntil(
+        context, "phoneNumberEnter", (route) => false);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -53,8 +62,27 @@ class _homeState extends State<home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hello"),
-      ),
+          iconTheme:
+              const IconThemeData(color: Color.fromRGBO(99, 100, 167, 1)),
+          elevation: 0.0,
+          title: const Text(
+            'Dash Board',
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                color: Color.fromRGBO(99, 100, 167, 1)),
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Color.fromRGBO(99, 100, 167, 1),
+              ),
+              onPressed: () {
+                signOut(context);
+              },
+            ),
+          ]),
       body: user == null
           ? Container()
           : Column(
