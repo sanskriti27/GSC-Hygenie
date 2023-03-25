@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "314202539230",
+    "project_id": "hygenie-a59ea",
+    "storage_bucket": "hygenie-a59ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314202539230:android:658ce184767589acf96e4f",
+        "android_client_info": {
+          "package_name": "com.example.hygenie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314202539230-hsltm98p0d38qv8a09v3a9f3gejc3jc3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hygenie",
+            "certificate_hash": "2ac2baeb9b64f3bd79df6a7321a8709713636c17"
+          }
+        },
+        {
+          "client_id": "314202539230-v0iuv1ltcfc32l897bdagtb02qfp8qiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_aq5WwGzV1x3K2uhME-M-7WXuENT9Y74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314202539230-v0iuv1ltcfc32l897bdagtb02qfp8qiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
