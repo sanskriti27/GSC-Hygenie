@@ -10,6 +10,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 class phoneNumberEnter extends StatefulWidget {
   phoneNumberEnter({Key? key}) : super(key: key);
   static String verify = "";
+  static String phnNo = "";
   @override
   State<phoneNumberEnter> createState() => _phoneNumberEnter();
 }
@@ -47,31 +48,16 @@ class _phoneNumberEnter extends State<phoneNumberEnter> {
       if (documents.length == 0) {
         // Update data to server if new user
         FirebaseFirestore.instance
-            .collection('chat')
+            .collection('users')
             .doc(firebaseUser.uid)
             .set({
           'nickname': firebaseUser.displayName,
           'photoUrl': firebaseUser.photoURL,
           'id': firebaseUser.uid,
           'createdAt': DateTime.now().toString(),
-          'chattingWith': null
+          'phoneNumber': phoneNumber
         });
-
-        // Write data to local
-        currentUser = firebaseUser;
-        await prefs?.setString('id', currentUser!.uid);
-        await prefs?.setString('nickname', currentUser!.displayName ?? "");
-        await prefs?.setString('photoUrl', currentUser!.photoURL ?? "");
-      } else {
-        DocumentSnapshot documentSnapshot = documents[0];
-        UserChat userChat = UserChat.fromDocument(documentSnapshot);
-        // Write data to local
-        await prefs?.setString('id', userChat.id);
-        await prefs?.setString('nickname', userChat.nickname);
-        await prefs?.setString('photoUrl', userChat.photoUrl);
-        await prefs?.setString('aboutMe', userChat.aboutMe);
       }
-      // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(currentUserId: firebaseUser.uid)));
     }
   }
 
@@ -147,6 +133,7 @@ class _phoneNumberEnter extends State<phoneNumberEnter> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       onPressed: () async {
+                        phoneNumberEnter.phnNo = phoneNumber;
                         await FirebaseAuth.instance.verifyPhoneNumber(
                           phoneNumber: '${phoneNumber}',
                           timeout: const Duration(seconds: 120),

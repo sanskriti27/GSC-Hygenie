@@ -60,40 +60,44 @@ class _homeState extends State<home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          iconTheme:
-              const IconThemeData(color: Color.fromRGBO(99, 100, 167, 1)),
-          elevation: 0.0,
-          title: const Text(
-            'Dash Board',
-            style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                color: Color.fromRGBO(99, 100, 167, 1)),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.logout,
-                color: Color.fromRGBO(99, 100, 167, 1),
-              ),
-              onPressed: () {
-                signOut(context);
-              },
-            ),
-          ]),
-      body: user == null
-          ? Container()
-          : Column(
-              children: [
-                Text(
-                  'Welcome ' + '${user?.uid}',
-                  style: TextStyle(
-                      color: Color.fromRGBO(99, 100, 167, 1), fontSize: 20),
+    return Container(
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('images/homePageBGImage.png'),
+              fit: BoxFit.cover)),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              iconTheme:
+                  const IconThemeData(color: Color.fromRGBO(99, 100, 167, 1)),
+              elevation: 0.0,
+              actions: <Widget>[
+                IconButton(
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Color.fromRGBO(99, 100, 167, 1),
+                  ),
+                  onPressed: () {
+                    signOut(context);
+                  },
                 ),
-              ],
-            ),
+              ]),
+          body: SingleChildScrollView(
+              child: user == null
+                  ? Container()
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Welcome ' + '${user?.uid}',
+                            style: TextStyle(
+                                color: Color.fromRGBO(99, 100, 167, 1),
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ))),
     );
   }
 }

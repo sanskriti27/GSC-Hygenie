@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hygenie/otpSignIn/phoneNumber.dart';
+import 'package:hygenie/otpSignIn/storeUserInfo.dart';
 import 'package:pinput/pinput.dart';
 import 'package:hygenie/homePage/home.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class otpEnter extends StatefulWidget {
   otpEnter({Key? key}) : super(key: key);
@@ -13,7 +16,10 @@ class otpEnter extends StatefulWidget {
 
 class _otpEnterState extends State<otpEnter> {
   var height, width, phoneNumber;
+  User? currentUser;
+  SharedPreferences? prefs;
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -83,7 +89,31 @@ class _otpEnterState extends State<otpEnter> {
                                 verificationId: phoneNumberEnter.verify,
                                 smsCode: otpCode);
 
-                        await auth.signInWithCredential(credential);
+                        User? firebaseUser =
+                            (await auth.signInWithCredential(credential)).user;
+
+                        if (firebaseUser != null) {
+                          // Check is already sign up
+                          final QuerySnapshot result = await FirebaseFirestore
+                              .instance
+                              .collection('users')
+                              .where('id', isEqualTo: firebaseUser.uid)
+                              .get();
+                          final List<DocumentSnapshot> documents = result.docs;
+                          if (documents.length == 0) {
+                            // Update data to server if new user
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(firebaseUser.uid)
+                                .set({
+                              'nickname': firebaseUser.displayName,
+                              'photoUrl': firebaseUser.photoURL,
+                              'id': firebaseUser.uid,
+                              'createdAt': DateTime.now().toString(),
+                              'phoneNumber': phoneNumberEnter.phnNo
+                            });
+                          }
+                        }
 
                         Navigator.pushNamedAndRemoveUntil(
                             context, "homePage", (route) => false);
@@ -133,8 +163,9 @@ class _otpEnterState extends State<otpEnter> {
                   padding: EdgeInsets.only(top: height * 0.001, bottom: 0),
                   child: TextButton(
                     onPressed: () async {
+                      print("resend: ${phoneNumberEnter.phnNo}");
                       await FirebaseAuth.instance.verifyPhoneNumber(
-                        phoneNumber: '${phoneNumber}',
+                        phoneNumber: '${phoneNumberEnter.phnNo}',
                         timeout: const Duration(seconds: 120),
                         verificationCompleted:
                             (PhoneAuthCredential credential) {},
