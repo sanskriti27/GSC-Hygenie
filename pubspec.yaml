@@ -44,6 +44,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   shared_preferences: ^2.0.20
   google_sign_in: ^6.0.2
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

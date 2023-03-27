@@ -118,9 +118,14 @@ class _otpEnterState extends State<otpEnter> {
                         Navigator.pushNamedAndRemoveUntil(
                             context, "homePage", (route) => false);
                       } catch (e) {
-                        const AlertDialog(
-                          title: Text("Incorrect OTP"),
-                          content: Text("Enter the correct 6-digit OTP."),
+                        await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return const AlertDialog(
+                              title: Text("Incorrect OTP"),
+                              content: Text("Enter the correct 6-digit OTP."),
+                            );
+                          },
                         );
                       }
                     },
