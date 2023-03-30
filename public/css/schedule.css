@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+body{
+	font-family: 'Poppins', sans-serif;
+}
+.timeline-section{
+	background-color: #24292d;
+	min-height: 100vh;
+	padding: 100px 15px;
+}
+.timeline-items{
+	max-width: 1000px;
+	margin:auto;
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+}
+.timeline-items::before{
+	content: '';
+	position: absolute;
+	width: 2px;
+	height: 100%;
+	background-color: #2f363e;
+	left: calc(50% - 1px);
+}
+.timeline-item{
+	margin-bottom: 40px;
+	width: 100%;
+	position: relative;
+}
+.timeline-item:last-child{
+	margin-bottom: 0;
+}
+.timeline-item:nth-child(odd){
+    padding-right: calc(50% + 30px);
+	text-align: right;
+}
+.timeline-item:nth-child(even){
+    padding-left: calc(50% + 30px);
+}
+.timeline-dot{
+	height: 16px;
+	width: 16px;
+	background-color: #eaa023;
+	position: absolute;
+	left: calc(50% - 8px);
+	border-radius: 50%;
+	top:10px;
+}
+.timeline-date{
+	font-size: 18px;
+	color: #eaa023;
+	margin:6px 0 15px;
+}
+.timeline-content{
+    background-color: #2f363e;
+	padding: 30px;
+	border-radius: 5px;
+}
+.timeline-content h3{
+    font-size: 20px;
+	color: #ffffff;
+	margin:0 0 10px;
+	text-transform: capitalize;
+	font-weight: 500;
+}
+.timeline-content p{
+    color: #c8c8c8;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 22px;
+}
+
+/* responsive */
+@media(max-width: 767px){
+	.timeline-items::before{
+		left: 7px;
+	}
+	.timeline-item:nth-child(odd){
+		padding-right: 0;
+		text-align: left;
+	}
+	.timeline-item:nth-child(odd),
+	.timeline-item:nth-child(even){
+		padding-left: 37px;
+	}
+	.timeline-dot{
+		left:0;
+	}
+}
+
+.faq {
+    margin: 50px auto;
+    padding: 0 15px;
+    max-width: 1096px;
+}
+.faq .scroll{
+    overflow-x: auto;
+}
+.faq ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.faq .faq-list{
+    padding-left: 35px;
+}
+.faq .faq-title{
+    font-weight: 700;
+}
+.faq .faq-wrapper{
+    margin-top: 55px;
+    display: flex;
+    justify-content: space-between;
+}
+.faq .faq-list-title{
+    padding-right: 35px;
+}
+.faq .faq-item.active{
+    border: 2px solid pink;
+    background-color: pink;
+}
+.faq .faq-item:not(:first-child){
+    margin-top: 55px;
+}
+.faq .faq-item{
+    padding: 20px;
+    font-size: 1rem;
+    text-align: center;
+    border: 2px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+.faq .faq-item:hover{
+    border: 2px solid pink;
+}
+.faq .faq-answer-wrapper{
+    padding-left: 30px;
+    flex: 1 1 70%;
+}
+.faq .faq-answer{
+    position: relative;
+    height: 80vh;
+}
+.faq .faq-elem{
+    position: relative;
+    display: none;
+    visibility: hidden;
+    line-height: 1.8;
+    text-align: justify;
+    transition: all 0.8s ease;
+}
+.faq .faq-elem.active {
+    display: block;
+    visibility: visible;
+}
+.faq-text:nth-child(2){
+    margin-top: 20px;
+}
+.faq-list-title{
+    padding-left: 35px;
+}
+.faq-list__item{
+    position: relative;
+    margin-top: 16px;
+}
+.faq-list__item:before{
+    content: "";
+    position: absolute;
+    left: -25px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: orange;
+    border-radius: 50%;
+}
+
+.faq .faq-overlay{
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0, 0);
+    transition: all 1s ease;
+}
+.faq .faq-overlay.active{
+    z-index: 4;
+    background: rgba(255,255,255, 1);
+}
+
+@media screen and (max-width: 700px){
+    .faq .faq-answer {
+        margin-top: 35px;
+        height: 100vh;
+    }
+    .faq-wrapper{
+        flex-direction: column;
+    }
+    .faq .faq-item:not(:first-child){
+        margin-top: 0;
+    }
+    .faq .faq-list-title{
+        padding-right: 0;
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .faq .faq-answer-wrapper{
+        padding-left: 0;
+    }
+}

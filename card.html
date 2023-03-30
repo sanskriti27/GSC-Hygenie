@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Horizontal Scrolling Card</title>
+    <style>
+      /* Set up the container for the card */
+      .card-container {
+        width: 100%;
+        overflow-x: scroll;
+        white-space: nowrap;
+      }
+
+      /* Set up the individual card items */
+      .card-item {
+        display: inline-block;
+        width: 300px;
+        height: 200px;
+        background-color: lightblue;
+        margin: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      /* Add a hover effect to the card items */
+      .card-item:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card-container">
+      <div class="card-item" onclick="alert('Fix any leaks in your toilet or plumbing system to prevent wasting water.');">
+        <p>Fix any leaks in your toilet or plumbing system to prevent wasting water.</p>
+      </div>
+      <div class="card-item" onclick="alert('Use a low-flow or dual-flush toilet to reduce water usage.');">
+        <p>Use a low-flow or dual-flush toilet to reduce water usage.</p>
+      </div>
+      <div class="card-item" onclick="alert('Don\'t use your toilet as a trash can to avoid unnecessary flushes.');">
+        <p>Don't use your toilet as a trash can to avoid unnecessary flushes.</p>
+      </div>
+      <div class="card-item" onclick="alert('Consider using a bidet or installing a bidet attachment to reduce toilet paper usage.');">
+        <p>Consider using a bidet or installing a bidet attachment to reduce toilet paper usage.</p>
+      </div>
+    </div>
+    <script>
+      // Automatically scroll the card every 5 seconds
+      setInterval(function() {
+        document.querySelector('.card-container').scrollBy({
+          left: 350,
+          behavior: 'smooth'
+        });
+      }, 5000);
+    </script>
+  </body>
+</html>

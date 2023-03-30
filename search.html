@@ -4,18 +4,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--========== BOX ICONS ==========-->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" href="./img/favicon_penguin.png">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+  <!-- ==== Style Sheet===== -->
+    <link rel="stylesheet" href="styles.css">
     <title>Search | Hygenie</title>
 </head>
 <body>
 
-<h1>Search by Title</h1>
-<input type="text" id="search-input-title" placeholder="Search by Title">
-<ul id="search-results-title"></ul>
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+          <a href="#home" class="nav__logo"><img src="img/logo.png" alt=""></a></a>
+    
+          <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+              <li class="nav__item"><a href="index.html" class="nav__link ">Home</a></li>
+                <li class="nav__item"><a href="search.html" class="nav__link active" >Search</a></li>
+              <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
+            </ul>
+          </div>
+    
+          <div class="nav__toggle" id="nav-toggle">
+            <i class='bx bx-grid-alt'></i>
+          </div>
+        </nav>
+      </header>
 
-<h1>Search by Location</h1>
-<button id="search-input-location">Search Washrooms Near Me</button>
-<ul id="search-results-location"></ul>
+      <section class="search">
+        <h1>Search by Title</h1>
+        
+      </section>
+
+      <section class="search" id="search">
+        <div class="search__container bd-container bd-grid">
+            <div class="search__data location" >
+                <h2 class="search__title">Want to find toilets nearby?</h2>
+                <button id="search-input-location">Search </button>
+                <ul id="search-results-location"></ul>
+            </div>
+            <!-- <div class="search__data card-container">
+                <div class="decoration__data card-item">
+                    <h3 class="decoration__title">Tips on Water Conservation</h3>
+                    <p>Fix any leaks in your toilet or plumbing system to prevent wasting water.</p>
+                  </div>
+                
+                  <div class="decoration__data card-item">
+                    <h3 class="decoration__title">Tips on Energy Conservation</h3>
+                    <p>Use natural lighting or energy-efficient light bulbs in your bathroom.</p>
+                  </div>
+                
+                  <div class="decoration__data card-item">
+                    <h3 class="decoration__title">Tips on Reducing Waste</h3>
+                    <p>Use recycled or biodegradable toilet paper to reduce waste.</p>
+                  </div>
+                
+            </div> -->
+          <div class="search__data search__name">
+            <h2 class="search__title">Search by Name</h2>
+            <input type="text" id="search-input-title" placeholder="Search by Name">
+            <l id="search-results-title"></l>
+          </div>
+          
+        </div>
+      </section>
+      <section class="footer " id="contact_us">
+        <div class="footer__container bd-container bd-grid">
+          <div class="footer__social">
+            <h2 class="footer__title" style="color: white;">Built at Google Solution Challenge 2023</h2>
+            <h3 class="footer__title" style="color: white;">&#169; G-PKTS</h3>
+          </div>
+  
+        </div>
+  
+      </section>
+
 
 </body>
 <script src="./search.js" type="module"></script>
+<!--========== SCROLL REVEAL ==========-->
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<!--========== MAIN JS ==========-->
+<script src="./main.js"></script>
+
+<!-- Timeline.js -->
+<script src="./public/js/timeline.js"></script>
+
+<!-- Sponsors -->
+<script src="./public/js/sponsors.js"></script>
 </html>
