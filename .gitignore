@@ -1,4 +1,2 @@
 .env
 
-# ignore firebase
-echo "firebase" >> .gitignore
