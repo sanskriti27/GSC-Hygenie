@@ -1,31 +1,19 @@
 # GDSC Solution Challenge 2023 - Hygenie
-
-<aside>
-❓ **Problem Statement**
-
-</aside>
-
+**❓ Problem Statement**
 ---
 
 According to a survey by the World Toilet Organization, 61% of people in 13 Asian countries avoid using public washrooms due to cleanliness concerns. In a survey by Initial Hygiene, 44% of people in Australia said they would not visit a business again if they encountered unclean washrooms. 
 
 The lack of access to public restrooms is a common problem faced by many people, especially travelers, and tourists. Finding a clean and safe public restroom can be a challenging and time-consuming task, which can be further complicated by unfamiliarity with the location. 
 
-<aside>
 🌍 **Target SDG: Clean Water and Sanitation**
-
-</aside>
-
 ---
 
 SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basic sanitation facilities as a key component of ensuring universal access to clean water and sanitation. Public toilet facilities play a critical role in providing access to safe and hygienic sanitation for the general public. Access to clean and well-maintained public toilet facilities can help prevent the spread of diseases, promote public health, and improve the overall quality of life. 
 
 ![Untitled](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Untitled.png)
 
-<aside>
 📊 **Market Survey**
-
-</aside>
 
 ---
 
@@ -46,11 +34,7 @@ SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basi
 1. Our app stands out from existing ones by providing real-time analysis of washroom cleanliness and safety scores, utilizing advanced AI technology for efficient data processing and user-friendly navigation.
 2. Our app benefits people by ensuring that they can easily locate clean and safe washrooms, receive necessary assistance during emergencies, and report any issues for a quick resolution.
 
-<aside>
 🎯 **Target Audience**
-
-</aside>
-
 ---
 
 ![           Commuters](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_shopping_bags_8l6g.svg)
@@ -69,11 +53,7 @@ People with Infants and Kids
 
             Tourists
 
-<aside>
-🤔 **Assumptions**
-
-</aside>
-
+**Assumptions**
 ---
 
 🖥️ ******************Technical******************
@@ -87,11 +67,7 @@ People with Infants and Kids
 1. The users will provide relevant feedback on toilet facilities.
 2. Easy-to-Use portal to locate the facility.
 
-<aside>
 🛠️ **Our Solution**
-
-</aside>
-
 ---
 
  1️⃣ **Search Public Facility by Name** 
