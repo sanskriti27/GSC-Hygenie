@@ -1277,7 +1277,7 @@ time {
   background-color: #DEFFE4;
 }
 
-.not-safe, .not-safe{
+.not-safe, .not-clean{
   color: #9F0C0C;
   border:  1px solid #9F0C0C;
   background-color: #FFD5D5;
@@ -1574,5 +1574,8 @@ time {
   }
 }
 
+.button-white{
+  background-color: #f3f1f1 !important;
+}
 
 

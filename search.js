@@ -56,7 +56,7 @@ searchInput.addEventListener('input', () => {
     const div = document.createElement('div');
     const safety = result.safety_rating > 4 ? "Safe" : "Not Safe";
     const safetyclass = result.safety_rating > 4 ? "safe" : "not-safe";
-    const cleanliness = result.cleanliness_rating > 3.5 ? "Clean" : "Not Clean";
+    const cleanliness = result.cleanliness_rating > 3.5? "Clean" : "Not Clean";
     const cleanlinessclass = result.cleanliness_rating > 3.5 ? "clean" : "not-clean";
     const overall_rating = result.overall_rating;
     div.innerHTML = `
@@ -195,9 +195,9 @@ searchInputLocation.addEventListener('click', () => {
             
             if (distanceInKm <= radiusInKm) {
               const safety = doc.data().safety_rating > 4 ? 'Safe' : 'Not Safe';
-              const safeclassName = doc.data().safety_rating > 4 ? 'safe' : '';
-              const cleanliness = doc.data().cleanliness_rating > 3.5 ? 'Clean' : 'Not Clean';
-              const cleanclassName = doc.data().cleanliness_rating > 3.5 ? 'clean' : '';
+              const safeclassName = doc.data().safety_rating > 4 ? 'safe' : 'not-safe';
+              const cleanliness = doc.data().cleanliness_rating > 3.5? 'Clean' : 'Not Clean';
+              const cleanclassName = doc.data().cleanliness_rating > 3.5 ? 'clean' : 'not-clean';
               const overall_rating = doc.data().overall_rating
               const title = doc.data().title;
                 // add card to search results
