@@ -90,7 +90,7 @@ People with Infants and Kids
 
 https://user-images.githubusercontent.com/51715172/229200947-ddbdf8b5-2563-492c-b81f-2c8e5bea9883.mp4
 
-
+---
 
 2️⃣ **Search by Location**
 
@@ -108,7 +108,7 @@ https://user-images.githubusercontent.com/51715172/229200947-ddbdf8b5-2563-492c-
 
 https://user-images.githubusercontent.com/51715172/229200969-7130743e-5a15-4580-8b69-113f93861066.mp4
 
-
+---
 
 3️⃣ **Amenities of the Toilet**
 
@@ -127,7 +127,7 @@ https://user-images.githubusercontent.com/51715172/229200969-7130743e-5a15-4580-
 
 https://user-images.githubusercontent.com/51715172/229200989-39ec4a95-a218-44ce-bc59-cb455b3f5362.mp4
 
-
+---
 
 **4️⃣ Ratings about Safety and Cleanliness**
 
@@ -146,7 +146,7 @@ https://user-images.githubusercontent.com/51715172/229200989-39ec4a95-a218-44ce-
 
 https://user-images.githubusercontent.com/51715172/229201028-87bd61b1-5a78-43ef-8b45-6ba4c66c41fc.mp4
 
-
+---
 
 5️⃣ **Show Location on Map**
 
@@ -165,7 +165,7 @@ https://user-images.githubusercontent.com/51715172/229201028-87bd61b1-5a78-43ef-
 
 https://user-images.githubusercontent.com/51715172/229202287-37ec1d7e-059a-4c90-a0f9-0f09f46fb9e7.mp4
 
-
+---
 6️⃣ **Reporting issues and Emergency Assistance**
 
 ********************Advantages********************
