@@ -2,27 +2,71 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" type="image/png" href="./img/favicon_penguin.png">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+  <!-- ==== Style Sheet===== -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css"  rel="stylesheet" />
     <title>Reporting</title>
   </head>
   <body>
-    <h1 class="main-heading">Reporting</h1>
-    
-    <h2 class="section-heading">Report Issue</h2>
-    <ul class="options-list">
-      <li>Select the issue category:</li>
-      <ul class="sub-options-list">
-        <li>Broken facilities</li>
-        <li>Lack of toilet paper</li>
-        <li>Dirty facilities</li>
-        <li>Other</li>
-      </ul>
-      <li>Provide details and photos (optional)</li>
-    </ul>
-    
-    <h2 class="section-heading">Emergency Assistance</h2>
-    <ul class="options-list">
-      <li>Call emergency services</li>
-      <li>Send distress signal with location to emergency services</li>
-    </ul>
+    <header class="l-header" id="header">
+      <nav class="nav bd-container">
+        <a href="#home" class="nav__logo"><img src="img/logo.png" alt=""></a></a>
+  
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="index.html" class="nav__link ">Home</a></li>
+              <li class="nav__item"><a href="search.html" class="nav__link " >Search</a></li>
+            <li><i class='bx bx-toggle-left change-theme' id="theme-button"></i></li>
+          </ul>
+        </div>
+  
+        <div class="nav__toggle" id="nav-toggle">
+          <i class='bx bx-grid-alt'></i>
+        </div>
+      </nav>
+    </header>
+    <section class="report" id="report">
+      <div class="report__container bd-container bd-grid ">
+        <h1 class="main-heading home__title">Reporting</h1>
+        <h3 class="section-heading">Issue(s) Encountered</h3>
+        
+
+
+        <!-- form with onsubmit directing to a function passing form entries -->
+        
+          <form class="report_form" id="form_report">
+            <div ><input type="checkbox" class="styled-checkbox" name="broken facilites"> Broken facilities</div>
+            <div><input type="checkbox" class="styled-checkbox" name="lack of toilet paper"> Lack of toilet paper</div>
+            <div><input type="checkbox" class="styled-checkbox" name="dirty facilities"> Dirty facilities</div>
+            <div><input type="checkbox" class="styled-checkbox" name="other"> Other</div>
+            <div class="text-form details">Details of Issue(s) <input type="text" name="details_of_issue"></div>
+            <div class="text-form comments">Additional Comments <input type="text" name="additional_comments" required></div>
+            
+            <div class="flex items-center justify-center w-full">
+              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                  <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                  </div>
+                  <input id="dropzone-file" name="image" type="file" class="hidden" />
+              </label>
+            </div> 
+            <button id="formbtn" type="submit" class="button submit-form">Submit</button>
+        </form>
+      </div>
+    </section>
   </body>
+  <script src="main.js"></script>
+  <script src="report.js" type="module"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+  
 </html>

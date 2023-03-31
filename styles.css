@@ -1,6 +1,9 @@
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
+
+
+
 /*===== VARIABLES CSS =====*/
 :root {
   --header-height: 3rem;
@@ -40,6 +43,7 @@
   --z-fixed: 100;
 }
 
+
 @media screen and (min-width: 968px) {
   :root {
     --biggest-font-size: 3rem;
@@ -76,7 +80,7 @@ body.dark-theme {
   right: 1.5rem;
   top: 2.2rem;
   display: flex;
-  color: var(--title-color);
+  color: var(--first-color);
   font-size: 2rem;
   cursor: pointer;
 }
@@ -137,6 +141,7 @@ img {
 .l-main {
   overflow: hidden;
 }
+
 
 .bd-container {
   max-width: 968px;
@@ -298,12 +303,14 @@ img {
 /*========== BUTTONS ==========*/
 .button {
   display: inline-block;
-  background-color: var(--first-color);
-  color: #fff;
+  background-color: #1A2A52!important;
+  color: var(--body-color);
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: var(--font-semi-bold);
   transition: 0.3s;
+  border: 1px transparent solid;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -317,7 +324,6 @@ img {
 }
 
 .button-link:hover {
-  background-color: transparent;
   color: var(--first-color-alt);
 }
 
@@ -393,6 +399,8 @@ img {
     text-align: center;
   }
 }
+
+
 
 /*========== ACCESSORIES ==========*/
 .accessory__container {
@@ -562,18 +570,21 @@ img {
   .send__img {
     width: 100%;
   }
+
 }
 
 @media screen and (min-width: 576px) {
   .home__container,
-  .search__container
+  .search__container,
+  .report__container,
+  .washroom__container,
   .share__container,
   .send__container {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
   }
 
-  .home__container, .search__container {
+  .home__container, .search__container, .washroom__container, .report__container {
     padding: 5rem 0 0;
   }
 
@@ -599,10 +610,14 @@ img {
   }
 }
 
+
+
 @media screen and (min-width: 768px) {
   body {
     margin: 0;
   }
+
+  
 
   .section {
     padding-top: 7rem;
@@ -631,7 +646,7 @@ img {
     margin-left: var(--mb-4);
   }
 
-  .home__container, .search__container {
+  .home__container, .search__container, .washroom__container, .report__container {
     padding: 7rem 2rem 0;
   }
 
@@ -685,7 +700,7 @@ img {
     width: 469px;
   }
 
-  .home__container, .search__container
+  .home__container, .search__container, .washroom__container, .report__container,
   .share__container,
   .send__container {
     column-gap: 5rem;
@@ -1079,7 +1094,7 @@ time {
     margin:auto;
   }
 
-  .home__container, .search__container{
+  .home__container, .search__container, .washroom__container, .report-container{
     margin-bottom:3.2vh;
   }
 }
@@ -1127,6 +1142,7 @@ time {
   row-gap: 2.5rem;
 }
 
+
 .search__data input{
   margin-bottom: 1rem;
   padding: 0.7rem;
@@ -1136,27 +1152,28 @@ time {
   box-shadow: 0px 4px 20px rgba(205, 212, 220, 0.5);
 }
 
-.location{
+.location>.image-loc{
   display: flex;
   flex-direction: column;
   height: 30vh;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url('img/location-img.jpg');
   padding: 2rem;
   border-radius: 1rem;
+  background-size: cover;
 }
 
-.location>h2{
+.location>.image-loc>h2{
   color: #f3f1f1;
 }
 
-.location>button{
+.location>.image-loc>button{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 2rem;
   width: 30%;
-  background: #f3f1f1;
+  background: #1A2A52;
   border-radius: 5rem;
   cursor: pointer;
   border-color: transparent;
@@ -1199,6 +1216,363 @@ time {
   display: none;
 }
 
-.search__name{
-  height: 50vh;
+.result__rating{
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+
+.search__name {
+  height: fit-content;
+  padding: 2rem;
+}
+
+.search__location{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+
+#search-results-title, #search-results-location {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#search-results-location, #search-results-title{
+  display: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.result-card{
+  width: 25rem;
+  height: 35rem;
+}
+
+.tabs{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tabs .tab{
+  width: 10rem;
+  font-size: 1rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 5rem;
+  margin-bottom: 0.3rem;
+}
+
+.safe, .clean{
+  color: #11B887;
+  border: 1px solid #11B887;
+  background-color: #DEFFE4;
+}
+
+.not-safe, .not-safe{
+  color: #9F0C0C;
+  border:  1px solid #9F0C0C;
+  background-color: #FFD5D5;
+}
+
+.amenities>div{
+  margin: 1rem 0;
+}
+
+.amenities-icons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0px;
+  gap: 10px;
+}
+
+.amenities-icons i{
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  background-color:#1A2A52 ;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  color:#f3f1f1;
+}
+
+.result-card__rating, .result__rating{
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result__rating div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.result-card__rating div, .result__rating div{
+  font-size: small;
+  border-radius: 20px;
+  width: 5rem;
+  background-color: #f0f0f0e5;
+  box-shadow: 0px 4px 20px rgba(158, 163, 168, 0.5);
+  border: 1px solid rgba(158, 163, 168, 0.5);
+  padding: 0.2rem;
+}
+
+.result-card__rating i, .result__rating i{
+  color:rgba(0, 107, 196, 0.5)
+}
+
+/*========== Washroom ==========*/
+
+.washroom__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.image-container{
+  width: 80%;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.washroom__img {
+  justify-self: center;
+  border-radius: 0.5rem;
+}
+
+.washroom__title {
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-bold);
+  margin-bottom: var(--mb-2);
+}
+
+.washroom__description {
+  margin-bottom: var(--mb-3);
+}
+
+.washroom-amenities-icons>.amenities{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.amenities-ico{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0px;
+  gap: 10px;
+}
+
+
+.amenities-ico i{
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  background-color:#1A2A52 ;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  color:#f3f1f1;
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  border: 0.5px solid rgb(217, 216, 216)
+}
+
+.selected{
+  color: var(--first-color-send);
+}
+
+.ratings-container{
+  padding: 1rem 4rem ;
+  margin: 1rem;
+}
+
+.washroom-ratings-container-title{
+  margin-bottom: 0.5rem;
+}
+
+.star{
+  margin: 0.3rem 0.7rem;
+  cursor: pointer;
+}
+
+.star-group{
+  display: flex;
+  flex-direction: row;
+}
+
+.map-div{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.map-div h2 i{
+  cursor: pointer;
+}
+
+#map { 
+  width: 40rem;
+  height: 30rem;
+  margin: 1rem;
+  border-radius:1rem;
+}
+
+.action-buttons{
+  margin: 1rem;
+}
+
+/* report */
+
+.report__container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.report-div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1rem;
+}
+
+.report_form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.text-form, .photo-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.text-form input{
+  width: 50rem;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  word-wrap: break-word;
+  background-color: var(--container-color)
+}
+
+.submit-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--first-color);
+  padding: 0.5rem 4rem;
+  border-radius: 0.3rem;
+}
+
+/* change checkbox input css*/
+.styled-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 0.2rem;
+  background-color: #fff;
+}
+
+.styled-checkbox::before {
+  content: "";
+  display: none;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 20px;
+}
+
+.styled-checkbox:checked {
+  background-color: var(--first-color-alt);
+  border-color: var(--first-color);
+}
+
+.styled-checkbox:checked::before {
+  display: block;
+}
+
+/* focus border */
+.styled-checkbox:focus {
+  outline: none;
+  border-color: var(--first-color);
+}
+
+@media screen and (max-width: 767px) {
+  .result-card{
+    width: 15rem;
+    height: 30rem;
+  }
+  #search-results-title, #search-results-location{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .washroom__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .action-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .action-buttons button{
+    width: 100%;
+  }
+
+  .map-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30rem;
+  }
+
+  #map{
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+
+

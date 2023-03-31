@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="icon" type="image/png" href="./img/favicon_penguin.png">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
   <link rel="icon" type="image/x-icon" href="public/favicon.ico">
   <!-- ==== Style Sheet===== -->
@@ -36,39 +35,26 @@
         </nav>
       </header>
 
-      <section class="search">
-        <h1>Search by Title</h1>
-        
-      </section>
 
       <section class="search" id="search">
-        <div class="search__container bd-container bd-grid">
+        <div class="search__container bd-container ">
             <div class="search__data location" >
-                <h2 class="search__title">Want to find toilets nearby?</h2>
-                <button id="search-input-location">Search </button>
-                <ul id="search-results-location"></ul>
+                <div class="image-loc">
+                  <h2 class="search__title">Want to find toilets nearby?</h2>
+                  <button id="search-input-location">Search </button>
+                </div>
             </div>
-            <!-- <div class="search__data card-container">
-                <div class="decoration__data card-item">
-                    <h3 class="decoration__title">Tips on Water Conservation</h3>
-                    <p>Fix any leaks in your toilet or plumbing system to prevent wasting water.</p>
-                  </div>
-                
-                  <div class="decoration__data card-item">
-                    <h3 class="decoration__title">Tips on Energy Conservation</h3>
-                    <p>Use natural lighting or energy-efficient light bulbs in your bathroom.</p>
-                  </div>
-                
-                  <div class="decoration__data card-item">
-                    <h3 class="decoration__title">Tips on Reducing Waste</h3>
-                    <p>Use recycled or biodegradable toilet paper to reduce waste.</p>
-                  </div>
-                
-            </div> -->
+
+            <div class="search__container-cards bd-container bd-grid">
+              <div class="search__data search__location">
+                <div id="search-results-location"></div>
+              </div>
+            </div>
+            
           <div class="search__data search__name">
             <h2 class="search__title">Search by Name</h2>
             <input type="text" id="search-input-title" placeholder="Search by Name">
-            <l id="search-results-title"></l>
+            <div id="search-results-title"></div>
           </div>
           
         </div>
@@ -91,11 +77,5 @@
 <script src="https://unpkg.com/scrollreveal"></script>
 
 <!--========== MAIN JS ==========-->
-<script src="./main.js"></script>
-
-<!-- Timeline.js -->
-<script src="./public/js/timeline.js"></script>
-
-<!-- Sponsors -->
-<script src="./public/js/sponsors.js"></script>
+<script src="main.js"></script>
 </html>
