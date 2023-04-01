@@ -216,7 +216,11 @@ searchInputLocation.addEventListener('click', () => {
 });
 
 // handle when a result is fetched but before that backspace is pressed
-
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Backspace') {
+    searchResults.innerHTML = '';
+  }
+});
 
 // Search function for name search as user types
 searchInput.addEventListener('input', (e) => {
@@ -241,67 +245,68 @@ searchInput.addEventListener('input', (e) => {
 
 
 const displayWashrooms = (washrooms) => {
-  const htmlString = washrooms
-    .map((washroom) => {
-      var isSafe = 'true';
-      var isClean = 'true';
-      const reviews = washroom.reviews.filter(review => review.length > 0);
-      if (reviews.length === 0) {
-        isSafe = 'true';
-        isClean = 'true';
-      } else {
-        const sentimentAnalysis = localStorage.getItem(washroom.title);
-        const sentimentAnalysisData = JSON.parse(sentimentAnalysis);
-        if(sentimentAnalysisData) {
-          isSafe = sentimentAnalysisData.isSafe;
-          isClean = sentimentAnalysisData.isClean;
-        } else {
-          fetch(`https://toiletdescription.pythonanywhere.com/predict/${reviews}`)
-            .then(response => response.json())
-            .then(data => {
-              isSafe = data.isSafe;
-              isClean = data.isClean;
-              localStorage.setItem(washroom.title, JSON.stringify(data));
-            });
-        }
-      }
+  // clear search results
+  searchResults.innerHTML = '';
 
-      const clean = isClean=== 'true' ? 'Clean' : 'Not Clean';
-      const safe = isSafe=== 'true' ? 'Safe' : 'Not Safe';
-      const cleanclassName = isClean=== 'true' ? 'clean' : 'not-clean';
-      const safeclassName = isSafe=== 'true' ? 'safe' : 'not-safe';
-      const overall_rating = washroom.overall_rating
-      const title = washroom.title;
-      return `
-        <div class="search-result decoration__data result-card">
-        <img src="img/public.jpg" alt="user photo" class="result-card__image"> 
-        <div class="result-card__rating"> <div> <i class="fa-regular fa-star"></i> ${overall_rating.toFixed(1)}</div> </div>
-          <h1 class="decoration__title">${title}</h1>
-          <div class="tabs">
-            <div class="tab ${safeclassName}"> ${safe} </div>
-            <div class="tab ${cleanclassName}"> ${clean}</div>
-          </div>
-          <div class="amenities"><div>Amenities</div><div class="amenities-icons">
+// match the washrooms with the search input get data from firebase and display washrooms, get safe and clean changes according to the sentiment analysis of the reviews from python server
+  washrooms.forEach((washroom) => {
+    // get sentiment analysis either from local storage or from python server
+    let isSafe = 'true';
+    let isClean = 'true';
+    if (washroom.reviews) {
+      const sentimentAnalysis = localStorage.getItem(washroom.title);
+      const sentimentAnalysisData = JSON.parse(sentimentAnalysis);
+      if (sentimentAnalysisData) {
+        isSafe = sentimentAnalysisData.isSafe;
+        isClean = sentimentAnalysisData.isClean;
+      } else {
+        fetch(`https://toiletdescription.pythonanywhere.com/predict/${washroom.reviews}`)
+          .then((response) => response.json())
+          .then((data) => {
+            isSafe = data.isSafe;
+            isClean = data.isClean;
+            localStorage.setItem(washroom.title, JSON.stringify(data));
+          });
+      }
+    } else {
+      isSafe = 'false';
+      isClean = 'false';
+    }
+    const cleanclassName = isClean === 'true' ? 'clean' : 'not-clean';
+    const safeclassName = isSafe === 'true' ? 'safe' : 'not-safe';
+    const safe = isSafe === 'true' ? 'Safe' : 'Not Safe';
+    const clean = isClean === 'true' ? 'Clean' : 'Not Clean';
+    const div = document.createElement('div');
+    div.classList.add('decoration');
+    div.innerHTML = `
+      <div class="search-result decoration__data result-card">
+        <img src="img/public.jpg" alt="user photo" class="result-card__image">
+        <div class="result-card__rating"> <div> <i class="fa-regular fa-star"></i> ${washroom.overall_rating.toFixed(1)}</div> </div>
+        <h1 class="decoration__title">${washroom.title}</h1>
+        <div class="tabs">
+          <div class="tab ${safeclassName}">${safe}</div>
+          <div class="tab ${cleanclassName}">${clean}</div>
+        </div>
+        <div class="amenities"><div>Amenities</div><div class="amenities-icons">
           ${washroom.amenities['accessible'] ? `<i class="fa-solid fa-wheelchair fa-lg" title="Accessible"></i>` : ''}
-          ${washroom.amenities['baby_changing_facilities'] ? `<i class="fa-solid fa-baby fa-lg" title="Baby Changing Facilities"></i>` : ''}
-          ${washroom.amenities['soap'] ? `<i class="fa-solid fa-soap fa-lg" title="Soap"></i>` : ''}
           ${washroom.amenities['sanitary_napkin_disposal'] ? `<i class="fa-solid fa-link-simple fa-lg" title="Sanitary Napkin"></i>` : ''}
-          ${washroom.amenities['sanitizer'] ? `<i class="fa-solid fa-pump-medical fa-lg" title="Sanitizer"></i>` : ''}
+          ${washroom.amenities['baby_changing_facilities'] ? `<i class="fa-solid fa-baby fa-lg" title="Baby Changing Table"></i>` : ''}
           ${washroom.amenities['toilet_paper'] ? `<i class="fa-solid fa-toilet-paper fa-lg" title="Toilet Paper"></i>` : ''}
-          </div></div>
-        </div>`;
-    })
-    .join('');
-  searchResults.innerHTML = htmlString;
-  // add event listener to each result card
-  searchResults.forEach((div) => {
+          ${washroom.amenities['hand_sanitizer'] ? `<i class="fa-solid fa-hand-sanitizer fa-lg" title="Hand Sanitizer"></i>` : ''}
+          ${washroom.amenities['soap'] ? `<i class="fa-solid fa-soap fa-lg" title="Soap"></i>` : ''}
+          ${washroom.amenities['tissue_paper'] ? `<i class="fa-solid fa-tissue fa-lg" title="Tissue Paper"></i>` : ''}
+        </div>
+        </div>
+      </div>
+    `;
+    searchResults.appendChild(div);
+    // add event listener to each result card
     div.addEventListener('click', () => {
       // add washroom details to local storage
       localStorage.setItem('washroom', JSON.stringify(washroom));
       // redirect to washroom page
       window.location.href = 'singleWashroom.html';
-    });
+    }
+    ); 
   });
 };
-
-
