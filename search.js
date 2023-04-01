@@ -293,6 +293,16 @@ const displayWashrooms = (washrooms) => {
     })
     .join('');
   searchResults.innerHTML = htmlString;
+  // add event listener to each result card
+  const resultCards = document.querySelectorAll('.result-card');
+  resultCards.forEach((div) => {
+    div.addEventListener('click', () => {
+      // add washroom details to local storage
+      localStorage.setItem('washroom', JSON.stringify(washroom));
+      // redirect to washroom page
+      window.location.href = 'singleWashroom.html';
+    });
+  });
 };
 
 
