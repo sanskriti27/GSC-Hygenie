@@ -1,6 +1,6 @@
 // Importing the necessary properties and methods
 import {db, collectionRef} from "./firebase.js"
-import { getDocs, query, where } from 'https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js'
+import { getDocs, query, where, collection } from 'https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js'
 
 // Capturing DOM elements in variables 
 const searchInput = document.getElementById('search-input-title');
@@ -30,97 +30,6 @@ getDocs(collectionRef).then((querySnapshot) => {
   });
 });
 
-// Search function for title search
-searchInput.addEventListener('input', () => {
-  const searchTerms = searchInput.value;
-  // if searchTerms is empty, remove all search results
-  if (searchTerms === '') {
-    while (searchResults.firstChild) {
-      searchResults.removeChild(searchResults.firstChild);
-    }
-    searchInput.innerHTML = '';
-    return;
-  }
-
-  while (searchResults.firstChild) {
-    searchResults.removeChild(searchResults.firstChild);
-  }
-  searchInput.innerHTML = '';
-  const searchTerm = searchTerms.toLowerCase();
-
-  // Perform a search
-  const results = performSearch(searchTerm);
-  console.log(results);
-  // Display the results
-  results.forEach((result) => {
-    const div = document.createElement('div');
-    const safety = result.safety_rating > 4 ? "Safe" : "Not Safe";
-    const safetyclass = result.safety_rating > 4 ? "safe" : "not-safe";
-    const cleanliness = result.cleanliness_rating > 3.5? "Clean" : "Not Clean";
-    const cleanlinessclass = result.cleanliness_rating > 3.5 ? "clean" : "not-clean";
-    const overall_rating = result.overall_rating;
-    div.innerHTML = `
-      <div class="search-result decoration__data result-card">
-      <img src="img/public.jpg" alt="user photo" class="result-card__image"> 
-      <div class="result-card__rating"> <div> <i class="fa-regular fa-star"></i> ${overall_rating.toFixed(1)}</div> </div>
-        <h1 class="decoration__title">${result.title}</h1>
-        <div class="tabs">
-          <div class="tab safety ${safetyclass}"> ${safety} </div>
-          <div class="tab cleaniless ${cleanlinessclass}"> ${cleanliness}</div>
-        </div>
-        <div class="amenities"><div>Amenities</div><div class="amenities-icons">
-        </div></div>
-      </div>`;
-    searchResults.appendChild(div);
-    
-
-    // add tooltip to icons
-
-    // for amenities add icons related to amenties if amenity is true
-    const amenitiesdiv = div.querySelector('.amenities-icons');
-    if (result.amenities['accessible']) {
-
-      amenitiesdiv.innerHTML += ` <i class="fa-solid fa-wheelchair fa-lg" title="Accessibility"></i>`;
-    }
-    if (result.amenities['baby_changing_facilities']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-baby fa-lg" title="Baby Changing"></i>`;
-    }
-    // if(result.amenities['hand_dryer']) {
-    //   amenitiesdiv.innerHTML += `<i class="fa-solid fa-heat"></i>`;
-    // }
-    if(result.amenities['paper_towels']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-box-tissue fa-lg" title="Paper Towels"></i>`;
-    }
-    if(result.amenities['soap']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-soap fa-lg" title="Soap></i>`;
-    }
-    if(result.amenities['sanitary_napkin_disposal']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-link-simple fa-lg" title="Sanitary Napkin></i>`;
-    }
-    if(result.amenities['sanitizer']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-pump-medical fa-lg" title="Sanitizer"></i>`;
-    }
-    if(result.amenities['toilet_paper']) {
-      amenitiesdiv.innerHTML += `<i class="fa-solid fa-toilet-paper fa-lg" title="Toilet Paper"></i>`;
-    }
-    if(result.amenities['eco_friendly']) {
-      // add leaf in front of title
-      const title = div.querySelector('.decoration__title');
-      title.innerHTML = `<i class="fa-solid fa-leaf"></i> ${title.innerHTML}`;
-    }
-
-    // add event listener to each result card
-    div.addEventListener('click', () => {
-      // add washroom details to local storage
-      localStorage.setItem('washroom', JSON.stringify(result));
-      
-      // redirect to washroom page
-      window.location.href = 'singleWashroom.html';
-    });
-
-  })
-});
-
 
 
 
@@ -147,8 +56,6 @@ function performSearch(searchTerm) {
     return 0;
   });
 
-  // Return the first 10 washrooms
-  console.log(washrooms);
   return washrooms.slice(0, 10);
 }
 
@@ -177,27 +84,47 @@ searchInputLocation.addEventListener('click', () => {
         currentLatitude = position.coords['latitude'];
         currentLongitude = position.coords['longitude'];
         
-        console.log(currentLatitude);
-        console.log(Date.now());
     
         // Query all documents with a geopoint location within 1 kilometers of the user's location
         const radiusInKm = 10;
         
         getDocs(collectionRef).then((querySnapshot) => {
-            console.log("Enter get docs"+Date.now());
           querySnapshot.forEach((doc) => {
             const doc_latitude = doc.data().location['_lat'];
             const doc_longitude = doc.data().location['_long'];
             
     
             const distanceInKm = calculateDistance(currentLatitude,currentLongitude,doc_latitude,doc_longitude);
-            console.log(`${distanceInKm} km`);
             
             if (distanceInKm <= radiusInKm) {
-              const safety = doc.data().safety_rating > 4 ? 'Safe' : 'Not Safe';
-              const safeclassName = doc.data().safety_rating > 4 ? 'safe' : 'not-safe';
-              const cleanliness = doc.data().cleanliness_rating > 3.5? 'Clean' : 'Not Clean';
-              const cleanclassName = doc.data().cleanliness_rating > 3.5 ? 'clean' : 'not-clean';
+              var isSafe = 'true';
+              var isClean = 'true';
+              const reviews = doc.data().reviews.filter(review => review.length > 0);
+              if (reviews.length === 0) {
+                isSafe = 'true';
+                isClean = 'true';
+              } else {
+                const sentimentAnalysis = localStorage.getItem(doc.data().title);
+                const sentimentAnalysisData = JSON.parse(sentimentAnalysis);
+                if(sentimentAnalysisData) {
+                  isSafe = sentimentAnalysisData.isSafe;
+                  isClean = sentimentAnalysisData.isClean;
+                } else {
+                  fetch(`https://toiletdescription.pythonanywhere.com/predict/${reviews}`)
+                    .then(response => response.json())
+                    .then(data => {
+                      isSafe = data.isSafe;
+                      isClean = data.isClean;
+                      localStorage.setItem(doc.data().title, JSON.stringify(data));
+                    });
+                }
+              }
+
+              
+              const clean = isClean=== 'true' ? 'Clean' : 'Not Clean';
+              const safe = isSafe=== 'true' ? 'Safe' : 'Not Safe';
+              const cleanclassName = isClean=== 'true' ? 'clean' : 'not-clean';
+              const safeclassName = isSafe=== 'true' ? 'safe' : 'not-safe';
               const overall_rating = doc.data().overall_rating
               const title = doc.data().title;
                 // add card to search results
@@ -209,8 +136,8 @@ searchInputLocation.addEventListener('click', () => {
                 <div class="result-card__rating"> <div> <i class="fa-regular fa-star"></i> ${overall_rating.toFixed(1)}</div> </div>
                   <h1 class="decoration__title">${title}</h1>
                   <div class="tabs">
-                    <div class="tab safety ${safeclassName}  "> ${safety} </div>
-                    <div class="tab cleaninless ${cleanclassName}"> ${cleanliness}</div>
+                    <div class="tab ${safeclassName}"> ${safe} </div>
+                    <div class="tab ${cleanclassName}"> ${clean}</div>
                   </div>
                   <div class="amenities"><div>Amenities</div><div class="amenities-icons">
                   ${doc.data().amenities['accessible'] ? `<i class="fa-solid fa-wheelchair fa-lg" title="Accessible"></i>` : ''}
@@ -221,6 +148,7 @@ searchInputLocation.addEventListener('click', () => {
                   ${doc.data().amenities['toilet_paper'] ? `<i class="fa-solid fa-toilet-paper fa-lg" title="Toilet Paper"></i>` : ''}
                   </div></div>
                 </div>`;
+              
               
               searchResultsLocation.appendChild(div);
             
@@ -265,7 +193,6 @@ searchInputLocation.addEventListener('click', () => {
     
     
     function calculateDistance(currentLatitude, currentLongitude, docLatitude, docLongitude) {
-        console.log("enter calc dis"+Date.now());
     
         const earthRadiusKm = 6371;
       
@@ -287,3 +214,85 @@ searchInputLocation.addEventListener('click', () => {
     }
 
 });
+
+// handle when a result is fetched but before that backspace is pressed
+
+
+// Search function for name search as user types
+searchInput.addEventListener('input', (e) => {
+  // if backspace is pressed, clear search results
+  searchResults.innerHTML = ''; 
+  
+
+  const searchValue = searchInput.value.toLowerCase();
+  if (searchValue.length === 0) return;
+    // get washroom data from firebase and filter by search input washrooms from firebase
+  getDocs(collectionRef).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      if (doc.data().title.toLowerCase().includes(searchValue)) {
+        // add card to search results display washrooms, safe and clean changes according to the sentiment analysis of the reviews of the washroom from python server
+        displayWashrooms([doc.data()]);
+      }
+    });
+  });
+
+
+});
+
+
+const displayWashrooms = (washrooms) => {
+  const htmlString = washrooms
+    .map((washroom) => {
+      var isSafe = 'true';
+      var isClean = 'true';
+      const reviews = washroom.reviews.filter(review => review.length > 0);
+      if (reviews.length === 0) {
+        isSafe = 'true';
+        isClean = 'true';
+      } else {
+        const sentimentAnalysis = localStorage.getItem(washroom.title);
+        const sentimentAnalysisData = JSON.parse(sentimentAnalysis);
+        if(sentimentAnalysisData) {
+          isSafe = sentimentAnalysisData.isSafe;
+          isClean = sentimentAnalysisData.isClean;
+        } else {
+          fetch(`https://toiletdescription.pythonanywhere.com/predict/${reviews}`)
+            .then(response => response.json())
+            .then(data => {
+              isSafe = data.isSafe;
+              isClean = data.isClean;
+              localStorage.setItem(washroom.title, JSON.stringify(data));
+            });
+        }
+      }
+
+      const clean = isClean=== 'true' ? 'Clean' : 'Not Clean';
+      const safe = isSafe=== 'true' ? 'Safe' : 'Not Safe';
+      const cleanclassName = isClean=== 'true' ? 'clean' : 'not-clean';
+      const safeclassName = isSafe=== 'true' ? 'safe' : 'not-safe';
+      const overall_rating = washroom.overall_rating
+      const title = washroom.title;
+      return `
+        <div class="search-result decoration__data result-card">
+        <img src="img/public.jpg" alt="user photo" class="result-card__image"> 
+        <div class="result-card__rating"> <div> <i class="fa-regular fa-star"></i> ${overall_rating.toFixed(1)}</div> </div>
+          <h1 class="decoration__title">${title}</h1>
+          <div class="tabs">
+            <div class="tab ${safeclassName}"> ${safe} </div>
+            <div class="tab ${cleanclassName}"> ${clean}</div>
+          </div>
+          <div class="amenities"><div>Amenities</div><div class="amenities-icons">
+          ${washroom.amenities['accessible'] ? `<i class="fa-solid fa-wheelchair fa-lg" title="Accessible"></i>` : ''}
+          ${washroom.amenities['baby_changing_facilities'] ? `<i class="fa-solid fa-baby fa-lg" title="Baby Changing Facilities"></i>` : ''}
+          ${washroom.amenities['soap'] ? `<i class="fa-solid fa-soap fa-lg" title="Soap"></i>` : ''}
+          ${washroom.amenities['sanitary_napkin_disposal'] ? `<i class="fa-solid fa-link-simple fa-lg" title="Sanitary Napkin"></i>` : ''}
+          ${washroom.amenities['sanitizer'] ? `<i class="fa-solid fa-pump-medical fa-lg" title="Sanitizer"></i>` : ''}
+          ${washroom.amenities['toilet_paper'] ? `<i class="fa-solid fa-toilet-paper fa-lg" title="Toilet Paper"></i>` : ''}
+          </div></div>
+        </div>`;
+    })
+    .join('');
+  searchResults.innerHTML = htmlString;
+};
+
+

@@ -13,7 +13,10 @@ washroomTitleElement.innerHTML = washroomTitle;
 const washroomrating = document.querySelector('.result__rating');
 // add  <div> <i class="fa-regular fa-star"></i> ${washroom.overall_rating} </div> inside washroom-rating
 const newDiv = document.createElement('div');
-newDiv.innerHTML = `<i class="fa-regular fa-star"></i> ${washroom.overall_rating}`;
+// keep overall rating to 1 decimal place
+const overallRating = washroom.overall_rating.toFixed(1);
+
+newDiv.innerHTML = `<i class="fa-regular fa-star"></i> ${overallRating}`;
 washroomrating.appendChild(newDiv) 
 
 
@@ -55,8 +58,10 @@ const amenitiesdiv = document.querySelector('.amenities-ico');
 
 const getDirections = document.querySelector('.get-washroom-directions');
 getDirections.addEventListener('click', () => {
-  window.open(`https://www.google.com/maps/search/?api=1&query=${washroomTitle}`);
+  window.open(`https://www.google.com/maps/search/?api=1&query=${washroom.latitude},${washroom.longitude}`);
 });
+
+
 
 // redirect to report.html on clicking button with id get-report-option
 const getReportOption = document.querySelector('.get-report-option');
@@ -155,3 +160,94 @@ const emergencyNumber = document.querySelector('.get-emergency-assistance');
 emergencyNumber.addEventListener('click', () => {
   window.open(`tel:${102}`);
 });
+
+
+var myForm = document.getElementById("review-form");
+
+myForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  var formData = new FormData(this);
+  var formDataObj = Object.fromEntries(formData.entries());
+  const reviewRef = collection(db, "washrooms_hygenie");
+  const q = query(reviewRef, where('title', '==', washroomTitle));
+  getDocs(q).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      const currentReviews = doc.data().reviews;
+      const newReviews = [...currentReviews, formDataObj.review]
+      updateDoc(doc.ref, {
+        reviews: newReviews,
+      });
+      addReview(true);
+    });
+  });
+
+  // clear the form
+  myForm.reset();
+  alert("Review added successfully!");
+
+});
+
+addReview(false);
+
+
+// extract the reviews from the database and pass them to https://toiletdescription.pythonanywhere.com/predict/${reviews} to get the sentiment analysis
+function addReview(fromReview) {
+  const reviewRef = collection(db, "washrooms_hygenie");
+const q = query(reviewRef, where('title', '==', washroomTitle));
+getDocs(q).then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    const reviews = doc.data().reviews.filter(review => review !== '');
+    if (reviews.length === 0 || reviews === undefined) {
+      const reviewSentiment = document.querySelector('.washroom-description-text');
+      reviewSentiment.innerHTML = 'No reviews yet';
+      addTabs('true', 'true');
+      return;
+    }
+    if (!fromReview && localStorage.getItem(doc.data().title) && washroomTitle === JSON.parse(localStorage.getItem(doc.data().title)).washroomTitle) {
+      const sentiment_analysis = JSON.parse(localStorage.getItem(doc.data().title));
+      const reviewSentiment = document.querySelector('.washroom-description-text');
+      addTabs(sentiment_analysis.isClean, sentiment_analysis.isSafe);
+      reviewSentiment.innerHTML = sentiment_analysis.txt;
+    } else {
+      fetch(`https://toiletdescription.pythonanywhere.com/predict/${reviews}`)
+      .then(response => response.json())
+      .then(data => {
+        const reviewSentiment = document.querySelector('.washroom-description-text');
+        // add in local storage review and name of washroom
+        const sentiment_analysis = {
+          txt: data.txt,
+          isSafe: data.isSafe,
+          isClean: data.isClean,
+          washroomTitle: washroomTitle
+        }
+        localStorage.setItem(doc.data().title, JSON.stringify(sentiment_analysis));
+        addTabs(data.isClean, data.isSafe);
+        reviewSentiment.innerHTML = data.txt;
+      });
+    }
+  });
+});
+
+}
+
+function addTabs(isClean, isSafe) {
+  // if clean, not-clean, safe, not-safe class divs are already present, remove them
+ 
+  // if .tabs div already has children, remove them
+  const tabs = document.querySelector('.tabs');
+  while (tabs.firstChild) {
+    tabs.removeChild(tabs.firstChild);
+  }
+
+  const clean = isClean==='true' ? 'Clean' : 'Not Clean';
+  const safe = isSafe==='true' ? 'Safe' : 'Not Safe';
+  const cleanclassName = isClean === 'true' ? 'clean' : 'not-clean';
+  const safeclassName = isSafe === 'true' ? 'safe' : 'not-safe';
+  
+    tabs.innerHTML = `
+    <div class="tab ${cleanclassName}">${clean}</div>
+    <div class="tab ${safeclassName}">${safe}</div>
+  `;
+}
