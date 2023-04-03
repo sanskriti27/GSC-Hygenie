@@ -14,7 +14,7 @@ The lack of access to public restrooms is a common problem faced by many people,
 
 SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basic sanitation facilities as a key component of ensuring universal access to clean water and sanitation. Public toilet facilities play a critical role in providing access to safe and hygienic sanitation for the general public. Access to clean and well-maintained public toilet facilities can help prevent the spread of diseases, promote public health, and improve the overall quality of life. 
 
-![Untitled](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Untitled.png)
+![Untitled](GFG Solve for India 2023 - Hygenie/Untitled.png)
 
 📊 **Market Survey**
 
@@ -28,9 +28,9 @@ SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basi
 4. The survey campaign revealed that several washrooms remain unexplored, lacking proper facilities.
 5. SitOrSquat and Flush are some existing applications in the market.
 
-![RCND (1).png](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/RCND_(1).png)
+![RCND (1).png](GFG Solve for India 2023 - Hygenie/RCND_(1).png)
 
-![Copy of Hygenie App - Certificate of Volunteering.png](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Copy_of_Hygenie_App_-_Certificate_of_Volunteering.png)
+![Copy of Hygenie App - Certificate of Volunteering.png](GFG Solve for India 2023 - Hygenie/Copy_of_Hygenie_App_-_Certificate_of_Volunteering.png)
 
 **********Analysis********** 
 
@@ -40,19 +40,19 @@ SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basi
 🎯 **Target Audience**
 ---
 
-![           Commuters](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_shopping_bags_8l6g.svg)
+![           Commuters](GFG Solve for India 2023 - Hygenie/undraw_shopping_bags_8l6g.svg)
 
            Commuters
 
-![People with Infants and Kids](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_family_vg76.svg)
+![People with Infants and Kids](GFG Solve for India 2023 - Hygenie/undraw_family_vg76.svg)
 
 People with Infants and Kids
 
-![ People with Disability](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_personal_notes_-8-n63.svg)
+![ People with Disability](GFG Solve for India 2023 - Hygenie/undraw_personal_notes_-8-n63.svg)
 
  People with Disability
 
-![            Tourists](GDSC%20Solution%20Challenge%202023%20-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_travelers_re_y25a.svg)
+![            Tourists](GFG Solve for India 2023 - Hygenie/undraw_travelers_re_y25a.svg)
 
             Tourists
 
