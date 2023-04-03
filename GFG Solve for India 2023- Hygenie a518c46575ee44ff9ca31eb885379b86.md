@@ -1,22 +1,31 @@
-# GFG Solve for India 2023 - <a href="https://youtu.be/J4UOYt_t9m4" target="_blank">Hygenie</a>
+# GFG Solve for India 2023- Hygenie
 
-<a href="https://hygenie-gsc.netlify.app/" target="_blank">Demo</a>
+<aside>
+❓ **Problem Statement**
 
-**❓ Problem Statement**
+</aside>
+
 ---
 
 According to a survey by the World Toilet Organization, 61% of people in 13 Asian countries avoid using public washrooms due to cleanliness concerns. In a survey by Initial Hygiene, 44% of people in Australia said they would not visit a business again if they encountered unclean washrooms. 
 
 The lack of access to public restrooms is a common problem faced by many people, especially travelers, and tourists. Finding a clean and safe public restroom can be a challenging and time-consuming task, which can be further complicated by unfamiliarity with the location. 
 
+<aside>
 🌍 **Target SDG: Clean Water and Sanitation**
+
+</aside>
+
 ---
 
 SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basic sanitation facilities as a key component of ensuring universal access to clean water and sanitation. Public toilet facilities play a critical role in providing access to safe and hygienic sanitation for the general public. Access to clean and well-maintained public toilet facilities can help prevent the spread of diseases, promote public health, and improve the overall quality of life. 
 
-![Untitled](GFG Solve for India 2023 - Hygenie/Untitled.png)
+![Untitled](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Untitled.png)
 
+<aside>
 📊 **Market Survey**
+
+</aside>
 
 ---
 
@@ -28,35 +37,43 @@ SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basi
 4. The survey campaign revealed that several washrooms remain unexplored, lacking proper facilities.
 5. SitOrSquat and Flush are some existing applications in the market.
 
-![RCND (1).png](GFG Solve for India 2023 - Hygenie/RCND_(1).png)
-
-![Copy of Hygenie App - Certificate of Volunteering.png](GFG Solve for India 2023 - Hygenie/Copy_of_Hygenie_App_-_Certificate_of_Volunteering.png)
-
 **********Analysis********** 
 
 1. Our app stands out from existing ones by providing real-time analysis of washroom cleanliness and safety scores, utilizing advanced AI technology for efficient data processing and user-friendly navigation.
 2. Our app benefits people by ensuring that they can easily locate clean and safe washrooms, receive necessary assistance during emergencies, and report any issues for a quick resolution.
 
+![RCND (1).png](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/RCND_(1).png)
+
+![Copy of Hygenie App - Certificate of Volunteering.png](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Copy_of_Hygenie_App_-_Certificate_of_Volunteering.png)
+
+<aside>
 🎯 **Target Audience**
+
+</aside>
+
 ---
 
-![           Commuters](GFG Solve for India 2023 - Hygenie/undraw_shopping_bags_8l6g.svg)
+![           Commuters](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_shopping_bags_8l6g.svg)
 
            Commuters
 
-![People with Infants and Kids](GFG Solve for India 2023 - Hygenie/undraw_family_vg76.svg)
+![People with Infants and Kids](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_family_vg76.svg)
 
 People with Infants and Kids
 
-![ People with Disability](GFG Solve for India 2023 - Hygenie/undraw_personal_notes_-8-n63.svg)
+![ People with Disability](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_personal_notes_-8-n63.svg)
 
  People with Disability
 
-![            Tourists](GFG Solve for India 2023 - Hygenie/undraw_travelers_re_y25a.svg)
+![            Tourists](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/undraw_travelers_re_y25a.svg)
 
             Tourists
 
-**Assumptions**
+<aside>
+🤔 **Assumptions**
+
+</aside>
+
 ---
 
 🖥️ ******************Technical******************
@@ -70,7 +87,11 @@ People with Infants and Kids
 1. The users will provide relevant feedback on toilet facilities.
 2. Easy-to-Use portal to locate the facility.
 
+<aside>
 🛠️ **Our Solution**
+
+</aside>
+
 ---
 
  1️⃣ **Search Public Facility by Name** 
@@ -87,8 +108,7 @@ People with Infants and Kids
 
 **Demonstration**
 
-
-https://user-images.githubusercontent.com/51715172/229200947-ddbdf8b5-2563-492c-b81f-2c8e5bea9883.mp4
+[Search by Name.mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Search_by_Name.mp4)
 
 ---
 
@@ -105,8 +125,7 @@ https://user-images.githubusercontent.com/51715172/229200947-ddbdf8b5-2563-492c-
 
 **Demonstration**
 
-
-https://user-images.githubusercontent.com/51715172/229200969-7130743e-5a15-4580-8b69-113f93861066.mp4
+[Search by Location.mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Search_by_Location.mp4)
 
 ---
 
@@ -124,8 +143,7 @@ https://user-images.githubusercontent.com/51715172/229200969-7130743e-5a15-4580-
 
 **Demonstration**
 
-
-https://user-images.githubusercontent.com/51715172/229200989-39ec4a95-a218-44ce-bc59-cb455b3f5362.mp4
+[Amenities.mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Amenities.mp4)
 
 ---
 
@@ -143,8 +161,7 @@ https://user-images.githubusercontent.com/51715172/229200989-39ec4a95-a218-44ce-
 
 **Demonstration**
 
-
-https://user-images.githubusercontent.com/51715172/229201028-87bd61b1-5a78-43ef-8b45-6ba4c66c41fc.mp4
+[Clean and safe.mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Clean_and_safe.mp4)
 
 ---
 
@@ -162,10 +179,10 @@ https://user-images.githubusercontent.com/51715172/229201028-87bd61b1-5a78-43ef-
 
 ****************Demonstration****************
 
-
-https://user-images.githubusercontent.com/51715172/229202287-37ec1d7e-059a-4c90-a0f9-0f09f46fb9e7.mp4
+[Map.mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Map.mp4)
 
 ---
+
 6️⃣ **Reporting issues and Emergency Assistance**
 
 ********************Advantages********************
@@ -175,12 +192,9 @@ https://user-images.githubusercontent.com/51715172/229202287-37ec1d7e-059a-4c90-
 
 **************************Implementation**************************
 
-1. **Reporting Issues:** A form was added to the web application for users to report issues such as leaks and dirty areas. The responses from the form are processed using OpenAI to identify the type and severity of the issue.
+1. **Reporting Issues:** A form was added to the web application for users to report issues such as leaks and dirty areas. **The responses from the form are processed using OpenAI** to identify the type and severity of the issue.
 2. **Emergency Button:** When pressed, the emergency assistance button initiates a call to the ambulance service from the user's current location.
 
 ****************Demonstration****************
 
-
-https://user-images.githubusercontent.com/51715172/229201177-bdcc453c-7a4f-4d9a-988f-6741a30a3ebe.mp4
-
-
+[Hygenie (1).mp4](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Hygenie_(1).mp4)
