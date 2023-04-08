@@ -1,7 +1,7 @@
 # GFG Solve for India 2023- Hygenie
 
 <aside>
-❓ <b>Problem Statement
+❓ <b>Problem Statement</b>
 
 </aside>
 
@@ -12,7 +12,7 @@ According to a survey by the World Toilet Organization, 61% of people in 13 Asia
 The lack of access to public restrooms is a common problem faced by many people, especially travelers, and tourists. Finding a clean and safe public restroom can be a challenging and time-consuming task, which can be further complicated by unfamiliarity with the location. 
 
 <aside>
-🌍 <b>Target SDG: Clean Water and Sanitation
+🌍 <b>Target SDG: Clean Water and Sanitation</b>
 
 </aside>
 
@@ -23,7 +23,7 @@ SDG 6 - Clean Water and Sanitation - emphasizes the importance of access to basi
 ![Untitled](GFG%20Solve%20for%20India%202023-%20Hygenie%20a518c46575ee44ff9ca31eb885379b86/Untitled.png)
 
 <aside>
-📊 <b>Market Survey
+📊 <b>Market Survey</b>
 
 </aside>
 
