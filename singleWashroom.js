@@ -58,8 +58,8 @@ const amenitiesdiv = document.querySelector('.amenities-ico');
 
 const getDirections = document.querySelector('.get-washroom-directions');
 getDirections.addEventListener('click', () => {
-    const washroomLS = JSON.parse(localStorage.getItem('washroom'));
-  window.open(`https://www.google.com/maps/search/?api=1&query=${washroomLS.location.latitude},${washroomLS.location.longitude}`);
+   
+  window.open(`https://www.google.com/maps/search/?api=1&query=${washroomTitle}`);
 });
 
 
